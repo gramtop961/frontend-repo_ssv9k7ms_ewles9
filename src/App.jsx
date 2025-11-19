@@ -1,35 +1,47 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Work from './components/Work'
+import Services from './components/Services'
+import PortfolioCarousel from './components/PortfolioCarousel'
 import About from './components/About'
 import Contact from './components/Contact'
+import HorizontalScroller from './components/HorizontalScroller'
+import Slide from './components/Slide'
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-blue-100">
-      <div className="fixed inset-0 bg-[radial-gradient(80%_80%_at_50%_0%,rgba(59,130,246,0.12),rgba(17,24,39,0))]" />
+      <div className="fixed inset-0 bg-[radial-gradient(80%_80%_at_50%_0%,rgba(59,130,246,0.12),rgba(17,24,39,0))] pointer-events-none" />
 
       <Navbar />
 
-      <main className="relative">
-        <Hero />
-        <Work />
-        <About />
-        <Contact />
+      {/* Horizontal presentation-style flow */}
+      <HorizontalScroller>
+        <Slide id="top" bg="from-slate-950 via-slate-950 to-slate-900">
+          <Hero />
+        </Slide>
 
-        <footer className="py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-blue-200/70">
-              <p>© {new Date().getFullYear()} Designer Name — All rights reserved.</p>
-              <div className="flex items-center gap-4">
-                <a href="#work" className="hover:text-white">Work</a>
-                <a href="#about" className="hover:text-white">About</a>
-                <a href="#contact" className="hover:text-white">Contact</a>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </main>
+        <Slide id="services" bg="from-slate-950 via-slate-900 to-slate-950">
+          <Services />
+        </Slide>
+
+        <Slide id="work" bg="from-slate-950 via-slate-950 to-slate-900">
+          <PortfolioCarousel />
+        </Slide>
+
+        <Slide id="about" bg="from-slate-950 via-slate-900 to-slate-950">
+          <About />
+        </Slide>
+
+        <Slide id="contact" bg="from-slate-950 via-slate-950 to-slate-900">
+          <Contact />
+        </Slide>
+      </HorizontalScroller>
+
+      <footer className="absolute bottom-6 left-1/2 -translate-x-1/2">
+        <div className="rounded-full border border-white/10 bg-slate-900/60 px-4 py-2 text-xs text-blue-200/70 backdrop-blur">
+          © {new Date().getFullYear()} Designer Name
+        </div>
+      </footer>
     </div>
   )
 }

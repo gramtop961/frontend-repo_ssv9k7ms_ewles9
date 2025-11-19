@@ -6,8 +6,16 @@ function Navbar() {
 
   const scrollTo = (id) => {
     const el = document.getElementById(id)
+    const scroller = document.getElementById('scroller')
+    if (el && scroller) {
+      const left = el.offsetLeft
+      scroller.scrollTo({ left, behavior: 'smooth' })
+      setOpen(false)
+      return
+    }
+    // Fallback to default behavior if scroller not found
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      el.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
       setOpen(false)
     }
   }
@@ -23,7 +31,8 @@ function Navbar() {
             </button>
 
             <nav className="hidden md:flex items-center gap-8 text-sm">
-              <button onClick={() => scrollTo('work')} className="text-blue-100/80 hover:text-white transition-colors">Work</button>
+              <button onClick={() => scrollTo('services')} className="text-blue-100/80 hover:text-white transition-colors">Services</button>
+              <button onClick={() => scrollTo('work')} className="text-blue-100/80 hover:text-white transition-colors">Portfolio</button>
               <button onClick={() => scrollTo('about')} className="text-blue-100/80 hover:text-white transition-colors">About</button>
               <button onClick={() => scrollTo('contact')} className="text-blue-100/80 hover:text-white transition-colors">Contact</button>
               <a href="#contact" onClick={(e)=>{e.preventDefault();scrollTo('contact')}} className="inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 font-medium text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-shadow">Let’s talk</a>
@@ -36,7 +45,8 @@ function Navbar() {
 
           {open && (
             <div className="md:hidden border-t border-white/10 px-6 py-4 space-y-2">
-              <button onClick={() => scrollTo('work')} className="block w-full text-left text-blue-100/90 py-2">Work</button>
+              <button onClick={() => scrollTo('services')} className="block w-full text-left text-blue-100/90 py-2">Services</button>
+              <button onClick={() => scrollTo('work')} className="block w-full text-left text-blue-100/90 py-2">Portfolio</button>
               <button onClick={() => scrollTo('about')} className="block w-full text-left text-blue-100/90 py-2">About</button>
               <button onClick={() => scrollTo('contact')} className="block w-full text-left text-blue-100/90 py-2">Contact</button>
             </div>
